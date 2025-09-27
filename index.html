@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Global Leaders — CodeLoop.co</title>
+  <meta name="description" content="Global Leaders by CodeLoop.co — an invitation‑only program accelerating C‑level pioneers building disruptive technologies and international references in R&D." />
+  <meta name="theme-color" content="#0b0b0c" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#FFF4E6',
+              100: '#FFE6C2',
+              200: '#FFD099',
+              300: '#FFB467',
+              400: '#FF8F2A',
+              500: '#FF6A00', // primary orange
+              600: '#E85F00',
+              700: '#C94F00',
+              800: '#9A3C00',
+              900: '#7A2F00',
+            },
+            base: {
+              900: '#0b0b0c',
+              800: '#111214',
+              700: '#17181b',
+              600: '#1D1F23',
+              500: '#22252B',
+              400: '#2A2E36',
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Apple Color Emoji", "Segoe UI Emoji"],
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(255,106,0,.25), 0 8px 32px rgba(255,106,0,.12)',
+          },
+          backdropBlur: {
+            xs: '2px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Inter + Material Symbols for a Google‑like aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Rounded:FILL@0..1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* shadcn-like tokens */
+      --radius: 16px;
+      --ring: 0 0 0 2px rgba(255,106,0,.35);
+    }
+    .msr { font-family: 'Material Symbols Rounded'; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    .card { 
+      border-radius: var(--radius); 
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); 
+      border: 1px solid rgba(255,255,255,.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,106,0,.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3), 0 0 0 1px rgba(255,106,0,.1);
+    }
+    .ring-focus:focus-visible { outline: none; box-shadow: var(--ring); }
+    .noise { position: absolute; inset: -1px; background-image: url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1200&auto=format&fit=crop'); mix-blend-mode: soft-light; opacity:.04; pointer-events:none; filter: grayscale(100%); }
+    .grid-auto-fit { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    
+    /* Animações modernas */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 1s ease-out both;
+    }
+    
+    .animate-slide-in-left {
+      animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    
+    /* Melhorias tipográficas */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+    }
+    
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 40%, rgba(255,255,255,0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    h2 {
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    h3 {
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      color: #ffffff;
+    }
+    
+    /* CTAs melhorados */
+    .cta-primary {
+      background: linear-gradient(135deg, #FF6A00 0%, #E85F00 100%);
+      box-shadow: 0 4px 20px rgba(255,106,0,0.4), 0 0 0 1px rgba(255,106,0,0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 600;
+      letter-spacing: 0.025em;
+    }
+    
+    .cta-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(255,106,0,0.5), 0 0 0 1px rgba(255,106,0,0.3);
+      background: linear-gradient(135deg, #FF8F2A 0%, #FF6A00 100%);
+    }
+    
+    .cta-secondary {
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+    }
+    
+    .cta-secondary:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,106,0,0.3);
+      transform: translateY(-1px);
+    }
+    
+    /* Menu navigation melhorado */
+    nav a {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+      letter-spacing: 0.025em;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #FF6A00, #FF8F2A);
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    nav a:hover {
+      color: #FF6A00;
+      transform: translateY(-1px);
+    }
+    
+    /* Efeitos de imagem */
+    img {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    img:hover {
+      transform: scale(1.02);
+      filter: brightness(1.1) contrast(1.05);
+    }
+    
+    /* Badges e tags melhorados */
+    .badge {
+      background: linear-gradient(135deg, rgba(255,106,0,0.15) 0%, rgba(255,106,0,0.05) 100%);
+      border: 1px solid rgba(255,106,0,0.2);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .badge:hover {
+      background: linear-gradient(135deg, rgba(255,106,0,0.25) 0%, rgba(255,106,0,0.1) 100%);
+      border-color: rgba(255,106,0,0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* Estatísticas melhoradas */
+    .stat-number {
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      background: linear-gradient(135deg, #ffffff 0%, #FF6A00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Layout dinâmico do hero com composição sofisticada */
+    .hero-gallery {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 0.75rem;
+      height: 500px;
+      perspective: 1000px;
+    }
+    
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,106,0,0.1) 0%, transparent 50%, rgba(255,106,0,0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 2;
+    }
+    
+    .hero-image:hover::before {
+      opacity: 1;
+    }
+    
+    .hero-image:hover {
+      transform: translateY(-8px) rotateX(5deg) rotateY(2deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,106,0,0.2);
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 20px;
+    }
+    
+    .hero-image video {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      object-fit: cover;
+    }
+    
+    .hero-image:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.1) contrast(1.1) saturate(1.2);
+    }
+    
+    /* Posicionamento específico para cada imagem */
+    .hero-image-1 {
+      grid-column: 1 / 6;
+      grid-row: 1 / 5;
+      z-index: 5;
+      animation-delay: 0.1s;
+    }
+    
+    .hero-image-2 {
+      grid-column: 6 / 9;
+      grid-row: 1 / 4;
+      z-index: 4;
+      animation-delay: 0.2s;
+    }
+    
+    .hero-image-3 {
+      grid-column: 9 / 13;
+      grid-row: 1 / 6;
+      z-index: 6;
+      animation-delay: 0.3s;
+    }
+    
+    .hero-image-4 {
+      grid-column: 1 / 4;
+      grid-row: 5 / 9;
+      z-index: 3;
+      animation-delay: 0.4s;
+    }
+    
+    .hero-image-5 {
+      grid-column: 4 / 8;
+      grid-row: 4 / 8;
+      z-index: 7;
+      animation-delay: 0.5s;
+    }
+    
+    .hero-image-6 {
+      grid-column: 8 / 11;
+      grid-row: 6 / 9;
+      z-index: 2;
+      animation-delay: 0.6s;
+    }
+    
+    .hero-image-7 {
+      grid-column: 11 / 13;
+      grid-row: 6 / 9;
+      z-index: 1;
+      animation-delay: 0.7s;
+    }
+    
+    /* Elementos de destaque */
+    .hero-image-featured {
+      position: relative;
+    }
+    
+    .hero-image-featured::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, #FF6A00, #FF8F2A, #FFB366, #FF6A00);
+      background-size: 300% 300%;
+      border-radius: 22px;
+      z-index: -1;
+      animation: gradientShift 3s ease-in-out infinite;
+    }
+    
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    /* Efeitos de profundidade com sombras dinâmicas */
+    .depth-layer-1 {
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+    }
+    
+    .depth-layer-2 {
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.15));
+    }
+    
+    .depth-layer-3 {
+      filter: drop-shadow(0 16px 32px rgba(0,0,0,0.1));
+    }
+    
+    /* Animação de entrada fluida */
+    @keyframes heroImageReveal {
+      from {
+        opacity: 0;
+        transform: translateY(40px) rotateX(15deg);
+        filter: blur(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+        filter: blur(0px);
+      }
+    }
+    
+    .hero-image {
+      animation: heroImageReveal 1s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+    
+    /* Responsividade para mobile */
+    @media (max-width: 768px) {
+      .hero-gallery {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        height: 600px;
+      }
+      
+      .hero-image-1 {
+        grid-column: 1 / 4;
+        grid-row: 1 / 4;
+      }
+      
+      .hero-image-2 {
+        grid-column: 4 / 7;
+        grid-row: 1 / 3;
+      }
+      
+      .hero-image-3 {
+        grid-column: 1 / 7;
+        grid-row: 4 / 7;
+      }
+      
+      .hero-image-4 {
+        grid-column: 1 / 3;
+        grid-row: 7 / 10;
+      }
+      
+      .hero-image-5 {
+        grid-column: 3 / 6;
+        grid-row: 7 / 9;
+      }
+      
+      .hero-image-6 {
+        grid-column: 6 / 7;
+        grid-row: 7 / 10;
+      }
+      
+      .hero-image-7 {
+        grid-column: 3 / 7;
+        grid-row: 9 / 12;
+      }
+    }
+  </style>
+</head>
+<body class="bg-base-900 text-white font-sans antialiased selection:bg-brand-500/30">
+  <!-- Sticky Nav -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 transition-all">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mt-4 flex items-center justify-between rounded-2xl border border-white/10 bg-base-800/70 p-3 backdrop-blur-xs">
+        <a href="#top" class="flex items-center gap-2 font-semibold tracking-tight">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-brand-500 text-base-900 shadow-glow">CL</span>
+          <span class="hidden sm:block">Global Leaders</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-white/80">
+          <a href="#program" class="hover:text-white">Program</a>
+          <a href="#pillars" class="hover:text-white">Pillars</a>
+          <a href="#cohort" class="hover:text-white">Cohort</a>
+          <a href="#research" class="hover:text-white">R&amp;D</a>
+          <a href="#faq" class="hover:text-white">FAQ</a>
+        </nav>
+        <button id="cta" disabled class="ring-focus flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm text-white/80 outline-none backdrop-blur-xs transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-60" aria-describedby="invite-note">
+          <span class="msr">lock</span>
+          Request Invite
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="relative">
+    <!-- HERO -->
+    <section class="relative isolate overflow-hidden pt-36">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute left-1/2 top-[-15%] h-[44rem] w-[44rem] -translate-x-1/2 rounded-full bg-brand-500/10 blur-3xl"></div>
+        <div class="absolute right-[-10%] bottom-[-20%] h-[36rem] w-[36rem] rounded-full bg-brand-500/5 blur-3xl"></div>
+        <div class="noise"></div>
+      </div>
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid items-center gap-12 lg:grid-cols-2">
+          <div class="space-y-6 animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 backdrop-blur-xs badge">
+              <span class="msr text-base">verified</span> Invitation‑Only C‑Level Program by CodeLoop.co
+            </div>
+            <h1 class="text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              Global Leaders
+              <span class="block bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">Build What Moves the World</span>
+            </h1>
+            <p class="max-w-xl text-white/70 text-lg leading-relaxed">We accelerate global leaders to the forefront of their industries to become pioneers in high‑impact technology, research and development, and international reference. Focus areas include Web3/Blockchain, AR/VR, deep R&amp;D, innovation cycles, and neural network ecosystems.</p>
+            <div class="flex flex-wrap items-center gap-3">
+              <button disabled class="ring-focus group inline-flex items-center gap-2 rounded-2xl bg-brand-500/20 px-5 py-3 text-sm font-semibold text-brand-100 shadow-glow outline-none transition disabled:cursor-not-allowed disabled:opacity-70 cta-primary">
+                <span class="msr transition group-hover:translate-x-0.5">lock</span>
+                Request Invite (Invite‑Only)
+              </button>
+              <a href="#program" class="ring-focus inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm text-white/80 outline-none backdrop-blur-xs transition hover:bg-white/10 cta-secondary">
+                <span class="msr">arrow_downward</span> Explore Program
+              </a>
+            </div>
+            <p id="invite-note" class="text-xs text-white/50">Access is restricted. Invitations are issued directly to select executives and founders.</p>
+          </div>
+          <div class="relative animate-fade-in-up stagger-2">
+            <!-- Hero media collage dinâmico -->
+            <div class="hero-gallery">
+              <div class="hero-image hero-image-1 hero-image-featured depth-layer-3">
+                <img src="https://i.imgur.com/WsrfwiP.png" alt="High‑tech workspace" />
+              </div>
+              <div class="hero-image hero-image-2 depth-layer-2">
+                <img src="https://i.imgur.com/RU0d6nL.png" alt="Executive collaboration" />
+              </div>
+              <div class="hero-image hero-image-3 hero-image-featured depth-layer-3">
+                <video autoplay muted loop playsinline>
+                  <source src="https://i.imgur.com/GTTZQLV.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="hero-image hero-image-4 depth-layer-1">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Neural networks visualization" />
+              </div>
+              <div class="hero-image hero-image-5 hero-image-featured depth-layer-3">
+                <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?q=80&w=1200&auto=format&fit=crop" alt="AR/VR prototyping" />
+              </div>
+              <div class="hero-image hero-image-6 depth-layer-2">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop" alt="Data visualization" />
+              </div>
+              <div class="hero-image hero-image-7 depth-layer-1">
+                <img src="https://i.imgur.com/R0LZK38.png" alt="Innovation lab" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mx-auto mt-16 max-w-7xl px-6">
+        <div class="grid grid-cols-2 items-center gap-4 rounded-2xl border border-white/10 bg-base-800/60 p-4 backdrop-blur-xs sm:grid-cols-4 lg:grid-cols-6 animate-fade-in-up stagger-3">
+          <div class="text-center">
+            <div class="stat-number">20+</div>
+            <div class="text-xs text-white/60 font-medium">Countries</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">50+</div>
+            <div class="text-xs text-white/60 font-medium">C‑Level Fellows</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">$10B+</div>
+            <div class="text-xs text-white/60 font-medium">Combined Enterprise Value</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">120</div>
+            <div class="text-xs text-white/60 font-medium">R&amp;D Sprints</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">8</div>
+            <div class="text-xs text-white/60 font-medium">Innovation Tracks</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">∞</div>
+            <div class="text-xs text-white/60 font-medium">Network Effects</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRAM OVERVIEW -->
+    <section id="program" class="relative py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-12 max-w-2xl animate-fade-in-up">
+          <h2 class="text-3xl font-bold tracking-tight">Program Overview</h2>
+          <p class="mt-3 text-white/70 text-lg leading-relaxed">An elite, design‑led environment for executives building categories that matter. We combine peer councils, operator playbooks, and studio‑grade R&amp;D to turn bold bets into shipping products and lasting moats.</p>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <article class="card p-6 animate-fade-in-up stagger-1">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-brand-500/15 px-3 py-1 text-xs text-brand-200 badge"><span class="msr">rocket_launch</span> Velocity</div>
+            <h3 class="text-base font-semibold">Operator‑First Sprints</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Time‑boxed build cycles with board‑level guidance and dedicated research track to de‑risk v1 and vNext.</p>
+          </article>
+          <article class="card p-6 animate-fade-in-up stagger-2">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-brand-500/15 px-3 py-1 text-xs text-brand-200 badge"><span class="msr">groups</span> Network</div>
+            <h3 class="text-base font-semibold">Directors Peer Council</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Curated rooms where founders, CTOs, and chief scientists exchange playbooks and talent flows.</p>
+          </article>
+          <article class="card p-6 animate-fade-in-up stagger-3">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-brand-500/15 px-3 py-1 text-xs text-brand-200 badge"><span class="msr">psychology_alt</span> Insight</div>
+            <h3 class="text-base font-semibold">Research &amp; Foresight</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Signals and thesis maps around Web3, AR/VR, AI agents, neuro‑ecosystems, and frontier infra.</p>
+          </article>
+          <article class="card p-6 animate-fade-in-up stagger-4">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-brand-500/15 px-3 py-1 text-xs text-brand-200 badge"><span class="msr">science</span> Lab</div>
+            <h3 class="text-base font-semibold">Studio‑Grade P&amp;D</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Access a hands‑on build lab for rapid prototyping, validation, and narrative‑market fit.</p>
+          </article>
+          <article class="card p-6 animate-fade-in-up stagger-5">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-brand-500/15 px-3 py-1 text-xs text-brand-200 badge"><span class="msr">hub</span> Ecosystems</div>
+            <h3 class="text-base font-semibold">Neural Network Economies</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Design network effects, token incentives, and interoperability across partners and markets.</p>
+          </article>
+          <article class="card p-6 animate-fade-in-up stagger-6">
+            <div class="mb-3 inline-flex items-center gap-2 rounded-lg bg-brand-500/15 px-3 py-1 text-xs text-brand-200 badge"><span class="msr">award_star</span> Credibility</div>
+            <h3 class="text-base font-semibold">International Reference</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Build a brand of trust with global benchmarks, press readiness, and enterprise governance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PILLARS / FOCUS AREAS -->
+    <section id="pillars" class="relative py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-10 flex items-end justify-between gap-6">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight">Focus Areas</h2>
+            <p class="mt-3 max-w-2xl text-white/70">Short cycles. Strong theses. Execution with taste.</p>
+          </div>
+          <div class="hidden md:flex items-center gap-2 text-xs text-white/60">
+            <span class="msr">image</span> Replace visuals with your own case studies.
+          </div>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-3">
+          <div class="card overflow-hidden">
+            <img class="h-44 w-full object-cover" src="https://images.unsplash.com/photo-1516245834210-c4c142787335?q=80&w=1200&auto=format&fit=crop" alt="Blockchain" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Web3 &amp; Blockchain</h3>
+              <p class="mt-2 text-sm text-white/70">Token design, on‑chain governance, and compliant rails for enterprise‑grade adoption.</p>
+            </div>
+          </div>
+          <div class="card overflow-hidden">
+            <img class="h-44 w-full object-cover" src="https://i.imgur.com/IE36ll6.png" alt="AR/VR" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">AR/VR &amp; Spatial</h3>
+              <p class="mt-2 text-sm text-white/70">Immersive interfaces, digital twins, and spatial commerce with provable outcomes.</p>
+            </div>
+          </div>
+          <div class="card overflow-hidden">
+            <img class="h-44 w-full object-cover" src="https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop" alt="R&D" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">R&amp;D &amp; Innovation Cycles</h3>
+              <p class="mt-2 text-sm text-white/70">Hypothesis‑driven R&amp;D matched with capital discipline and shipping cadences.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="card p-5">
+            <h4 class="text-sm font-semibold">Neural Network Ecosystems</h4>
+            <p class="mt-2 text-sm text-white/70">Agentic systems, vector networks, and interoperable data layers.</p>
+          </div>
+          <div class="card p-5">
+            <h4 class="text-sm font-semibold">Enterprise AI</h4>
+            <p class="mt-2 text-sm text-white/70">Safety, privacy, observability, and ROI‑driven deployments.</p>
+          </div>
+          <div class="card p-5">
+            <h4 class="text-sm font-semibold">Frontier Infra</h4>
+            <p class="mt-2 text-sm text-white/70">Compute markets, zero‑knowledge proofs, and edge orchestration.</p>
+          </div>
+          <div class="card p-5">
+            <h4 class="text-sm font-semibold">Regulatory Readiness</h4>
+            <p class="mt-2 text-sm text-white/70">Global compliance, risk design, and auditability by default.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+    <!-- COHORT / PARTNERS -->
+    <section id="cohort" class="relative py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-10 max-w-2xl">
+          <h2 class="text-3xl font-bold tracking-tight">Cohort &amp; Partners</h2>
+          <p class="mt-3 text-white/70">World‑class founders, CTOs, chief scientists, and enterprise leaders shaping new categories.</p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="card p-6">
+            <div class="flex items-center gap-4">
+              <img class="h-14 w-14 rounded-xl object-cover" src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=300&auto=format&fit=crop" alt="Leader" />
+              <div>
+                <div class="text-sm text-white/60">Fellow</div>
+                <div class="font-semibold">CTO, Spatial Commerce</div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-white/70">Shipped an AR try‑on stack for 50M users; now building open spatial SDKs with enterprise SLAs.</p>
+          </div>
+          <div class="card p-6">
+            <div class="flex items-center gap-4">
+              <img class="h-14 w-14 rounded-xl object-cover" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=300&auto=format&fit=crop" alt="Leader" />
+              <div>
+                <div class="text-sm text-white/60">Fellow</div>
+                <div class="font-semibold">Head of Blockchain R&amp;D</div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-white/70">Designed compliant on‑chain settlement for cross‑border marketplaces; leads zero‑knowledge research.</p>
+          </div>
+          <div class="card p-6">
+            <div class="flex items-center gap-4">
+              <img class="h-14 w-14 rounded-xl object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=crop" alt="Leader" />
+              <div>
+                <div class="text-sm text-white/60">Partner</div>
+                <div class="font-semibold">Enterprise Cloud</div>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-white/70">Compute markets, data governance, and AI observability for regulated industries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH / CURRICULUM -->
+    <section id="research" class="relative py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mb-10 max-w-2xl">
+          <h2 class="text-3xl font-bold tracking-tight">Research Tracks</h2>
+          <p class="mt-3 text-white/70">Each fellow selects a primary track and a supporting thread. We mix theory, fieldwork, and build cycles.</p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="card p-6">
+            <h3 class="text-base font-semibold">Decentralized Infra</h3>
+            <ul class="mt-3 space-y-2 text-sm text-white/70 list-disc pl-5">
+              <li>Zero‑Knowledge Proof Systems</li>
+              <li>Cross‑Chain Interoperability</li>
+              <li>Token Incentive Design</li>
+            </ul>
+          </div>
+          <div class="card p-6">
+            <h3 class="text-base font-semibold">Spatial Interfaces</h3>
+            <ul class="mt-3 space-y-2 text-sm text-white/70 list-disc pl-5">
+              <li>3D UX Patterns</li>
+              <li>Digital Twins</li>
+              <li>Edge Rendering</li>
+            </ul>
+          </div>
+          <div class="card p-6">
+            <h3 class="text-base font-semibold">Neural Economies</h3>
+            <ul class="mt-3 space-y-2 text-sm text-white/70 list-disc pl-5">
+              <li>Agent Markets</li>
+              <li>Vector Commerce</li>
+              <li>Privacy‑Preserving AI</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="mt-12 card p-8 relative overflow-hidden">
+          <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-500/15 via-brand-500/5 to-transparent"></div>
+          <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-full blur-2xl -translate-y-8 translate-x-8"></div>
+          
+          <div class="flex items-center gap-3 mb-6">
+            <div class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/30">
+              <span class="msr text-brand-200">timeline</span>
+            </div>
+            <h3 class="text-xl font-bold bg-gradient-to-r from-white to-brand-200 bg-clip-text text-transparent">Cohort Timeline</h3>
+          </div>
+          
+          <ol class="grid gap-6 text-sm lg:grid-cols-3">
+            <li class="group relative rounded-2xl border border-brand-500/20 bg-gradient-to-br from-brand-500/10 to-brand-500/5 p-6 transition-all hover:border-brand-500/40 hover:shadow-lg hover:shadow-brand-500/10 hover:-translate-y-1">
+              <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-brand-500/20 flex items-center justify-center">
+                <span class="msr text-brand-300 text-sm">analytics</span>
+              </div>
+              <div class="inline-flex items-center gap-2 mb-3">
+                <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                <div class="font-bold text-brand-200 text-base">Phase 0</div>
+              </div>
+              <h4 class="font-semibold text-white mb-2">OmniAnalytic with Warden & Blueprints</h4>
+              <p class="text-white/70 leading-relaxed">Comprehensive analytical mapping with Warden monitoring systems and strategic blueprint development to support technical decision-making.</p>
+            </li>
+            
+            <li class="group relative rounded-2xl border border-brand-500/20 bg-gradient-to-br from-brand-500/10 to-brand-500/5 p-6 transition-all hover:border-brand-500/40 hover:shadow-lg hover:shadow-brand-500/10 hover:-translate-y-1">
+              <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-brand-500/20 flex items-center justify-center">
+                <span class="msr text-brand-300 text-sm">code</span>
+              </div>
+              <div class="inline-flex items-center gap-2 mb-3">
+                <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                <div class="font-bold text-brand-200 text-base">Phase 1</div>
+              </div>
+              <h4 class="font-semibold text-white mb-2">Technical Development with Dynamic Developers</h4>
+              <p class="text-white/70 leading-relaxed">Intensive development sprint with agile and dynamic teams, focused on rapid prototyping and technical validation of innovative concepts.</p>
+            </li>
+            
+            <li class="group relative rounded-2xl border border-brand-500/20 bg-gradient-to-br from-brand-500/10 to-brand-500/5 p-6 transition-all hover:border-brand-500/40 hover:shadow-lg hover:shadow-brand-500/10 hover:-translate-y-1">
+              <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-brand-500/20 flex items-center justify-center">
+                <span class="msr text-brand-300 text-sm">business</span>
+              </div>
+              <div class="inline-flex items-center gap-2 mb-3">
+                <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                <div class="font-bold text-brand-200 text-base">Phase 2</div>
+              </div>
+              <h4 class="font-semibold text-white mb-2">Governance & Business</h4>
+              <p class="text-white/70 leading-relaxed">Corporate governance structuring, sustainable business models, and scaling strategies to transform prototypes into market-ready products.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLY / INVITE -->
+    <section class="relative py-24">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="card relative overflow-hidden p-8 lg:p-12">
+          <div class="absolute inset-0 -z-10 bg-gradient-to-br from-brand-500/10 to-transparent"></div>
+          <div class="grid items-center gap-8 lg:grid-cols-3">
+            <div class="lg:col-span-2">
+              <h3 class="text-2xl font-bold">Invitation Only</h3>
+              <p class="mt-2 text-white/70">Global Leaders is not open for public applications. If you received an invitation from CodeLoop.co, follow the private onboarding link included in your email.</p>
+            </div>
+            <div class="flex items-center justify-end">
+              <button disabled class="ring-focus inline-flex items-center gap-2 rounded-2xl bg-white/10 px-6 py-3 text-sm font-semibold text-white/80 shadow-glow outline-none transition disabled:cursor-not-allowed disabled:opacity-60">
+                <span class="msr">lock</span> Request Invite
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="relative py-24">
+      <div class="mx-auto max-w-5xl px-6">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold tracking-tight">FAQ</h2>
+          <p class="mt-2 text-white/70">Short, decisive answers for busy leaders.</p>
+        </div>
+        <div class="space-y-3">
+          <details class="card group">
+            <summary class="cursor-pointer list-none p-5 text-sm font-semibold">Who should join?</summary>
+            <div class="border-t border-white/10 p-5 text-sm text-white/70">C‑level executives and founders leading initiatives in Web3, AR/VR, AI, or frontier infrastructure seeking rigorous R&amp;D and peer accountability.</div>
+          </details>
+          <details class="card group">
+            <summary class="cursor-pointer list-none p-5 text-sm font-semibold">What is the cadence?</summary>
+            <div class="border-t border-white/10 p-5 text-sm text-white/70">Monthly councils, bi‑monthly research reviews, and rolling studio sprints with measurable outcomes.</div>
+          </details>
+          <details class="card group">
+            <summary class="cursor-pointer list-none p-5 text-sm font-semibold">Is this an accelerator?</summary>
+            <div class="border-t border-white/10 p-5 text-sm text-white/70">It operates like an executive lab—less demo day, more durable moats, governance, and market trust.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 py-12">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+        <p class="text-xs text-white/50">© <span id="year"></span> CodeLoop.co — Global Leaders</p>
+        <div class="flex items-center gap-3 text-xs text-white/50">
+          <span class="msr">shield_lock</span>
+          Invite‑only. Confidential program materials.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Minimal JS for nav blur + current year
+    const nav = document.getElementById('nav');
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    const onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      nav.classList.toggle('opacity-95', y > 8);
+      nav.classList.toggle('backdrop-blur', y > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+  </script>
+</body>
+</html>
